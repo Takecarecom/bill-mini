@@ -9,6 +9,7 @@ export const users = pgTable("users", {
 	password: text().notNull(),
 	telegramToken: text("telegram_token"),
 	easyslipApiKey: text("easyslip_api_key"),
+	anthropicApiKey: text("anthropic_api_key"),
 	createdAt: timestamp("created_at", { mode: 'string' }).defaultNow().notNull(),
 	updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow().notNull(),
 	telegramChatId: varchar("telegram_chat_id", { length: 100 }).default(sql`NULL`),
@@ -39,4 +40,27 @@ export const transactions = pgTable("transactions", {
 			name: "transactions_user_id_users_id_fk"
 		}).onDelete("cascade"),
 	unique("uq_transactions_recipient_qrcode").on(table.recipientQrcode),
+]);
+
+export const expenses = pgTable("expenses", {
+	id: uuid().defaultRandom().primaryKey().notNull(),
+	userId: uuid("user_id").notNull(),
+	type: varchar({ length: 10 }).notNull(), // 'income' | 'expense'
+	category: varchar({ length: 50 }).notNull(),
+	amount: numeric({ precision: 12, scale: 2 }).notNull(),
+	description: text(),
+	merchantName: varchar("merchant_name", { length: 200 }),
+	receiptImage: text("receipt_image"),
+	date: timestamp({ mode: 'string' }).notNull(),
+	createdAt: timestamp("created_at", { mode: 'string' }).defaultNow().notNull(),
+	updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow().notNull(),
+}, (table) => [
+	index("idx_expenses_user_id").using("btree", table.userId.asc().nullsLast()),
+	index("idx_expenses_date").using("btree", table.date.asc().nullsLast().op("timestamp_ops")),
+	index("idx_expenses_type").using("btree", table.type.asc().nullsLast().op("text_ops")),
+	foreignKey({
+			columns: [table.userId],
+			foreignColumns: [users.id],
+			name: "expenses_user_id_users_id_fk"
+		}).onDelete("cascade"),
 ]);

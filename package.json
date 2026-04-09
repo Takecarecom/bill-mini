@@ -10,6 +10,7 @@
     "db:pull": "drizzle-kit pull"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.86.1",
     "@auth/drizzle-adapter": "^1.9.1",
     "@hookform/resolvers": "^5.1.1",
     "@marsidev/react-turnstile": "^1.1.0",

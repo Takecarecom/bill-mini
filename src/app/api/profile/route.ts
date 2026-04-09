@@ -24,6 +24,7 @@ export async function GET() {
         telegramToken: users.telegramToken,
         telegramChatId: users.telegramChatId,
         easyslipApiKey: users.easyslipApiKey,
+        anthropicApiKey: users.anthropicApiKey,
         createdAt: users.createdAt,
         updatedAt: users.updatedAt,
       })
@@ -63,7 +64,7 @@ export async function PUT(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { telegramToken, telegramChatId, easyslipApiKey, currentPassword, newPassword } = body;
+    const { telegramToken, telegramChatId, easyslipApiKey, anthropicApiKey, currentPassword, newPassword } = body;
 
     // Get current values from database to check if changed
     const currentUser = await db
@@ -139,6 +140,7 @@ export async function PUT(request: NextRequest) {
           telegramToken: telegramToken || null,
           telegramChatId: telegramChatId || null,
           easyslipApiKey: easyslipApiKey || null,
+          anthropicApiKey: anthropicApiKey || null,
           updatedAt: new Date().toISOString()
         })
         .where(eq(users.id, session.user.id));
@@ -150,6 +152,7 @@ export async function PUT(request: NextRequest) {
           telegramToken: telegramToken || null,
           telegramChatId: telegramChatId || null,
           easyslipApiKey: easyslipApiKey || null,
+          anthropicApiKey: anthropicApiKey || null,
           updatedAt: new Date().toISOString()
         })
         .where(eq(users.id, session.user.id));
