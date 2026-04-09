@@ -78,6 +78,7 @@ export default function ProfilePage() {
     telegramToken?: string;
     telegramChatId?: string;
     easyslipApiKey?: string;
+    anthropicApiKey?: string;
   }) => {
     setIsLoading(true);
     setMessage(null);
@@ -163,6 +164,7 @@ export default function ProfilePage() {
     telegramToken: profileData?.profile?.telegramToken || "",
     telegramChatId: profileData?.profile?.telegramChatId || "",
     easyslipApiKey: profileData?.profile?.easyslipApiKey || "",
+    anthropicApiKey: profileData?.profile?.anthropicApiKey || "",
   }), [profileData]);
 
   return (

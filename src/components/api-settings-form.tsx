@@ -239,6 +239,35 @@ export function APISettingsForm({
             </div>
           </div>
 
+          {/* Anthropic Configuration */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wider">
+              การตั้งค่า Anthropic (สแกนใบเสร็จ)
+            </h3>
+
+            <div>
+              <Label
+                htmlFor="anthropicApiKey"
+                className="text-white flex items-center"
+              >
+                <Key className="h-4 w-4 mr-2 text-orange-400" />
+                Anthropic API Key
+              </Label>
+              <div className="mt-2">
+                <Input
+                  id="anthropicApiKey"
+                  type="text"
+                  {...profileForm.register("anthropicApiKey")}
+                  className="bg-gray-800 border-gray-700 text-white"
+                  placeholder="sk-ant-..."
+                />
+              </div>
+              <p className="text-xs text-gray-400 mt-1">
+                ใช้สำหรับสแกนใบเสร็จด้วย AI (Claude Vision)
+              </p>
+            </div>
+          </div>
+
           <Button
             type="submit"
             disabled={isLoading}

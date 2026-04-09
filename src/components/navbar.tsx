@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { User, LogOut, BarChart3, Settings, CreditCard } from 'lucide-react';
+import { User, LogOut, BarChart3, Settings, CreditCard, Receipt } from 'lucide-react';
 import {
   Navbar as ResponsiveNavbar,
   NavBody,
@@ -36,6 +36,10 @@ export function Navbar() {
     {
       name: 'Transactions',
       link: '/transactions',
+    },
+    {
+      name: 'รายรับรายจ่าย',
+      link: '/expenses',
     },
     {
       name: 'Profile',
@@ -78,6 +82,12 @@ export function Navbar() {
                     <Link href="/transactions" className="flex items-center">
                       <CreditCard className="mr-2 h-4 w-4" />
                       Transactions
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="text-gray-300 focus:text-white focus:bg-gray-800">
+                    <Link href="/expenses" className="flex items-center">
+                      <Receipt className="mr-2 h-4 w-4" />
+                      รายรับรายจ่าย
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild className="text-gray-300 focus:text-white focus:bg-gray-800">
@@ -138,6 +148,7 @@ export function Navbar() {
                   >
                     {item.name === 'Dashboard' && <BarChart3 className="h-4 w-4" />}
                     {item.name === 'Transactions' && <CreditCard className="h-4 w-4" />}
+                    {item.name === 'รายรับรายจ่าย' && <Receipt className="h-4 w-4" />}
                     {item.name === 'Profile' && <Settings className="h-4 w-4" />}
                     <span className="block">{item.name}</span>
                   </Link>

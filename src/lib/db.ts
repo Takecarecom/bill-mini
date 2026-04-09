@@ -16,6 +16,8 @@ export type User = typeof schema.users.$inferSelect;
 export type NewUser = typeof schema.users.$inferInsert;
 export type Transaction = typeof schema.transactions.$inferSelect;
 export type NewTransaction = typeof schema.transactions.$inferInsert;
+export type Expense = typeof schema.expenses.$inferSelect;
+export type NewExpense = typeof schema.expenses.$inferInsert;
 
 export const db = drizzle(pool, { schema });
 

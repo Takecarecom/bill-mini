@@ -10,12 +10,12 @@ export default withAuth(
         const { pathname } = req.nextUrl;
         
         // Protected routes
-        const protectedRoutes = ['/dashboard', '/transactions', '/profile'];
-        
+        const protectedRoutes = ['/dashboard', '/transactions', '/profile', '/expenses'];
+
         if (protectedRoutes.some(route => pathname.startsWith(route))) {
           return !!token;
         }
-        
+
         return true;
       },
     },
@@ -23,5 +23,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/transactions/:path*', '/profile/:path*']
+  matcher: ['/dashboard/:path*', '/transactions/:path*', '/profile/:path*', '/expenses/:path*']
 };

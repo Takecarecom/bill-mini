@@ -3,3 +3,4 @@ export * from './auth';
 export * from './payment';
 export * from './profile';
 export * from './transaction';
+export * from './expense';
